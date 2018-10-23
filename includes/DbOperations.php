@@ -13,15 +13,14 @@
            Get all subnets from database
         */
         public function getAllSubnets(){
-            $stmt = $this->con->prepare("SELECT `cidr`, subnet, ips FROM subnets");
+            $stmt = $this->con->prepare("SELECT `cidr`, subnet FROM subnets");
             $stmt->execute(); 
-            $stmt->bind_result($cidr, $subnet, $ips);
+            $stmt->bind_result($cidr, $subnet);
             $subnets = array(); 
             while($stmt->fetch()){ 
                 $ip = array(); 
                 $ip['cidr'] = $cidr; 
                 $ip['subnet'] = $subnet;
-                $ip['ips'] = json_decode($ips); 
                 array_push($subnets, $ip);
             }             
             return $subnets; 

@@ -10,6 +10,7 @@ $app = new \Slim\App([
     ]
 ]);
 
+// Response all subnets
 $app->get('/allsubnets', function(Request $request, Response $response){
     $db = new DbOperations; 
     $subnets = $db->getAllSubnets();
@@ -22,6 +23,7 @@ $app->get('/allsubnets', function(Request $request, Response $response){
     ->withStatus(200);  
 });
 
+// Respond all IPs by cidr
 $app->get('/subnet/{cidr}', function(Request $request, Response $response, array $args){
     $cidr = $args['cidr'];
     $db = new DbOperations; 
@@ -35,6 +37,7 @@ $app->get('/subnet/{cidr}', function(Request $request, Response $response, array
     ->withStatus(200); 
 } );
 
+// Respond Subnet/IP details by ip id
 $app->get('/subnetdetail/{id}', function(Request $request, Response $response, array $args){
     $id = $args['id'];
     $db = new DbOperations; 
